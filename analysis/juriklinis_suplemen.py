@@ -1,4 +1,4 @@
-"""Suplemen naskah JuriKlinis dari tabel agregat di Hasil_JuriKlinis_2.md sampai _6.md.
+"""Suplemen naskah JuriKlinis dari tabel agregat di Hasil_JuriKlinis_2.md sampai _8.md.
 
 Seperti juriklinis_gambar.py, skrip ini tidak membaca data PhysioNet; ia mengurai tabel Markdown yang sudah dicetak
 skrip analisis, lalu menulis Naskah_JuriKlinis_Suplemen.md (bahasa Inggris) dengan tabel menurut urutan rujukan di
@@ -6,13 +6,15 @@ naskah. Ketepatan juri per model ada di Tabel 2 naskah, bukan di sini. S1: sensi
 label (_4). S2: selang bootstrap pasien untuk beda sensitivitas dan asimetri pada label bulat (_5). S3: label satu
 dokter acak lawan label akhir, sel 1–10 tetap "<11" (_3). S4: keenam penaksir pada simulasi superpopulasi (_6). S5:
 ketujuh penaksir pada audit tetap 100 pasien dengan koreksi populasi hingga (_2). S6: anggaran label per model untuk
-kedua rancangan (_6, _2). Gambar S1 dibuat juriklinis_gambar.py.
+kedua rancangan (_6, _2). S7: Δ juri saja pada beda benar kecil, rencana M butir 1 (_8). Gambar S1 dibuat
+juriklinis_gambar.py.
 
 Pakai:
     python analysis/juriklinis_suplemen.py
 """
 import pandas as pd
 
+from juriklinis_angka import angka, banyak_setelan, bertanda
 from juriklinis_gambar import FOLDER, NAMA_MODEL, NAMA_PENAKSIR, tabel_markdown
 
 NAMA_SUMBER = {"human": "Physician BHC", "llm": "LLM BHC"}
@@ -27,21 +29,12 @@ values are aggregates over the 100 patients of MIMIC-III-Ext-VeriFact-BHC v1.1.0
 "<11", as the data use agreement requires. Medians are over the 14 judge settings of each model unless stated
 otherwise. Large population: patients drawn with replacement, no finite-population correction (exploratory). Fixed
 audit: patients drawn without replacement from these 100, with the finite-population correction (planned stage 2).
-Tables S1, S2 and S4 are exploratory analyses added after the main results.
+Tables S1, S2, S4 and S7 are exploratory analyses added after the main results.
 
 **Fig. S1.** Coverage of the 95% interval for the difference against the number of physician-reviewed patients in the
 fixed audit, all six estimators (file JuriKlinis_GambarS1). Lines and filled markers: median over 126 settings; open
 markers: lowest setting. (a) Full range; (b) the same on 0.80–0.98. Dashed line: nominal 0.95.
 """
-
-
-def angka(nilai, digit=3):
-    return "∞" if str(nilai) in ("inf", "nan") else f"{float(nilai):.{digit}f}"
-
-
-def bertanda(nilai):
-    teks = f"{float(nilai):+.3f}"
-    return "0.000" if teks in ("+0.000", "-0.000") else teks.replace("-", "−")
 
 
 def tabel_s1():
@@ -111,7 +104,7 @@ def tabel_s4_s5():
     audit = tabel_markdown("Hasil_JuriKlinis_2.md", "Semua setelan juri")
     return [("**Table S4.** Exploratory: all six estimators by number of physician-reviewed patients drawn from a large "
              "population (1000 draws with replacement per m, no finite-population correction). Median over 126 "
-             "settings; PPI++ is PPI with a variance-minimising weight on the judge term, one weight or one per source.",
+             "settings; PPI++ is PPI with a variance-minimizing weight on the judge term, one weight or one per source.",
              ringkasan_penaksir(superpopulasi)),
             ("**Table S5.** All six estimators by number of physician-reviewed patients in the fixed audit of these 100 "
              "patients (1000 draws without replacement per m, finite-population correction). Median over 126 settings.",
@@ -135,6 +128,23 @@ def tabel_s6():
             "reached by m = 200 in the large population or m = 50 in the fixed audit).", keluar)
 
 
+def tabel_s7():
+    beda = tabel_markdown("Hasil_JuriKlinis_8.md", "Δ juri saja menurut beda benar")
+    keluar = pd.DataFrame({
+        "Lower true share": beda["acuan"].map(angka),
+        "True difference": beda["delta_benar"].map(lambda nilai: bertanda(nilai) if float(nilai) else "0"),
+        "Judge-only difference, median (range)": [
+            f"{bertanda(a)} ({bertanda(b)} to {bertanda(c)})" for a, b, c in zip(beda["median"], beda["min"], beda["maks"])],
+        "Settings with the wrong sign (of 126)": beda["tanda_salah"].map(banyak_setelan),
+        "Settings off by 0.05 or more (of 126)": beda["meleset_0,05"].map(banyak_setelan),
+    })
+    return ("**Table S7.** Exploratory: judge-only difference at smaller true differences, from each setting's "
+            "sensitivity and specificity by source in the equation for q_s (Methods 3.3). The lower true share is set to "
+            "0.050 (the observed LLM share) or 0.10 and the other source's share is higher by the absolute difference; "
+            "a positive difference is a physician excess. Assumes that judge accuracy does not change with the true "
+            "share.", keluar)
+
+
 def markdown_tabel(judul, tabel):
     baris = ["| " + " | ".join(tabel.columns) + " |", "|" + "---|" * len(tabel.columns)]
     baris += ["| " + " | ".join(str(sel) for sel in rekam) + " |" for rekam in tabel.itertuples(index=False)]
@@ -142,7 +152,7 @@ def markdown_tabel(judul, tabel):
 
 
 def main():
-    tabel = [tabel_s1(), tabel_s2(), tabel_s3(), *tabel_s4_s5(), tabel_s6()]
+    tabel = [tabel_s1(), tabel_s2(), tabel_s3(), *tabel_s4_s5(), tabel_s6(), tabel_s7()]
     bagian = [markdown_tabel(judul, isi) for judul, isi in tabel]
     (FOLDER / "Naskah_JuriKlinis_Suplemen.md").write_text(KEPALA + "\n" + "\n".join(bagian), encoding="utf-8")
 

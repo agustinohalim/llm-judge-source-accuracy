@@ -114,7 +114,7 @@ def gambar_cakupan():
         sumbu.set_xticks([5, 10, 20, 30, 50])
         sumbu.set_ylim(*batas_y)
         sumbu.set_title(judul, fontsize=9, color=GAYA["tinta"], loc="left")
-        rapikan(sumbu, "Labelled patients (m)", "Coverage of the 95% interval")
+        rapikan(sumbu, "Reviewed patients (m)", "Coverage of the 95% interval")
     panel[1].set_ylabel("")
     pegangan, nama_seri = panel[0].get_legend_handles_labels()
     figur.legend(pegangan, nama_seri, frameon=False, fontsize=8, loc="lower center", ncol=3)

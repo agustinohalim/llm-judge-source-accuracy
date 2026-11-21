@@ -27,7 +27,7 @@ the scripts import each other; set `PYTHONIOENCODING=utf-8` when redirecting out
 
 ## Layout
 
-- `analysis/` — scripts, the working notes `Hasil_JuriKlinis_0.md` to `Hasil_JuriKlinis_7.md` in which every number
+- `analysis/` — scripts, the working notes `Hasil_JuriKlinis_0.md` to `Hasil_JuriKlinis_8.md` in which every number
   of the manuscript was recorded with the copied output, and the figures in `Gambar/`. Order of the analyses:
   - `juriklinis_skema.py`, `juriklinis_hitung.py` — data structure and counts (`Hasil_0`);
   - `juriklinis_tahap1.py` — stage 1: judge accuracy by source and judge-only bias (`Hasil_1`);
@@ -40,9 +40,13 @@ the scripts import each other; set `PYTHONIOENCODING=utf-8` when redirecting out
   - `juriklinis_superpopulasi.py` — exploratory large-population simulation of plan section K (`Hasil_6`);
   - `juriklinis_anggaran_kontinu.py` — continuous review budgets and efficiency ratios of plan section L, computed
     from the `Hasil_6` summary tables without new data; the source of the manuscript's review budgets (`Hasil_7`);
+  - `juriklinis_bias_nol.py` — judge-only difference at smaller true differences (0, ±0.05, ±0.10), from the
+    `Hasil_1` per-setting accuracy table without new data, and `juriklinis_selang_anggaran.py` — patient-bootstrap
+    intervals for the review budgets; plan section M (`Hasil_8`);
   - `juriklinis_gambar.py`, `juriklinis_suplemen.py` — figures and supplementary tables, parsed from the notes;
-  - shared: `juriklinis_data.py` (loading), `juriklinis_bootstrap.py`, `juriklinis_markdown.py` (masking and tables).
-- `plan/` — an excerpt of the analysis plan (sections A, C, I, J, K).
+  - shared: `juriklinis_data.py` (loading), `juriklinis_bootstrap.py`, `juriklinis_markdown.py` (masking and tables),
+    `juriklinis_angka.py` (number formats of the supplementary tables).
+- `plan/` — an excerpt of the analysis plan (sections A, C, I–M).
 
 Comments, notes and the plan are in Indonesian. Glossary: *juri* judge, *setelan* judge setting, *sumber* source
 (*dokter* physician, *LLM*), *klaim* atomic claim, *kalimat* sentence, *kebenaran* reference label, *naif* / *juri

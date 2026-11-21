@@ -1,6 +1,6 @@
 # Analysis plan (excerpt)
 
-Sections A (decisions locked before results), C (data rules) and I–L (analyses added after internal review rounds,
+Sections A (decisions locked before results), C (data rules) and I–M (analyses added after internal review rounds,
 each recorded here before it was run) of the authors' working plan, in Indonesian. Sections on journal choice,
 manuscript outline and work steps are omitted, and sentences describing the internal review rounds were shortened.
 File names `Hasil_JuriKlinis_N.md` refer to `analysis/`.
@@ -205,3 +205,31 @@ label saja), tanpa menjalankan ulang simulasi:
 Skrip: `juriklinis_anggaran_kontinu.py` (mengurai tabel Markdown seperti `juriklinis_gambar.py`, tidak membaca data
 PhysioNet) → `Hasil_JuriKlinis_7.md`. Angka ini menggantikan anggaran kisi di abstrak, CRS, dan butir praktik; anggaran
 kisi tetap di Tabel 3 sebagai pemeriksaan cakupan.
+
+## M. Bias juri saja pada beda benar kecil dan selang anggaran (dicatat 21 Nov 2026 sebelum dijalankan; *post hoc*)
+
+Telaah internal kesembilan menyisakan dua isu metode. Methods X1: arah Δ juri saja benar mungkin hanya
+karena Δ benar besar (0,281). Methods X2: anggaran 20/49 dan rasio 0,41 tanpa selang. Pengguna memilih menjalankan
+keduanya sekarang (21 Nov) sebagai persiapan revisi. Keputusan bagian A dan angka utama tidak diubah.
+
+1. **Δ juri saja pada beda benar kecil (X1; tanpa data baru).** Dari tabel per setelan `Hasil_JuriKlinis_1.md`
+   (sens dan spek juri per sumber, 126 setelan): q_s = sens_s · p_s + (1 − spek_s)(1 − p_s). Tingkat benar sumber
+   yang lebih rendah = 0,050 (tingkat LLM teramati), sumber lainnya 0,050 + |Δ|, untuk Δ ∈ {−0,10, −0,05, 0, +0,05,
+   +0,10} (Δ > 0: dokter lebih tinggi). Kepekaan acuan: tingkat rendah 0,10. Pemeriksaan: pada p teramati rumus harus
+   mengulang `delta_naif`. Dicetak per Δ: median, minimum, maksimum Δ juri saja atas setelan; banyak setelan bertanda
+   salah (Δ ≠ 0); banyak dengan |Δ juri − Δ| ≥ 0,05; untuk Δ = 0 banyak dengan Δ juri ≥ +0,05 dan ≤ −0,05; dan median
+   per model pada Δ = 0. Asumsi yang dinyatakan: sens dan spek juri per sumber tidak berubah bila tingkat benar
+   berubah.
+2. **Selang anggaran (X2).** Bootstrap luar 500 ulangan atas 100 pasien (bobot multinomial, benih 20261125). Pada
+   tiap ulangan, dari varians pengaruh per pasien (fungsi yang sama dengan simulasi): m* = (2 · 1,96 · SD / 0,10)²
+   untuk label saja dan PPI per setelan; dicatat median m* PPI atas setelan, m* label saja (median atas setelan), dan
+   rasionya. Dilaporkan nilai pada data asli (pemeriksaan: dekat 20 dan 49 dari `Hasil_JuriKlinis_7.md`) dan selang
+   persentil 95 %. Varian: utama, Not Supported saja, kalimat BHC LLM (tingkat).
+
+Skrip: `juriklinis_bias_nol.py` (butir 1, mengurai tabel Markdown, tidak membaca data PhysioNet) dan
+`juriklinis_selang_anggaran.py` (butir 2, data lokal, hanya agregat) → `Hasil_JuriKlinis_8.md`. Bila butir 1
+menunjukkan Δ juri ≥ +0,05 pada Δ benar 0 untuk sebagian besar setelan, revisi menulis bahwa arahnya benar karena beda
+benar besar (abstrak, Simpulan, Diskusi). Bila selang butir 2 lebar, CRS memberi rentang, bukan "about 20".
+
+Catatan 21 Nov 2026 sesudah hasil (`Hasil_JuriKlinis_8.md`): pengguna memilih memasukkan kedua hasil ke naskah sebelum
+kirim, bukan menunggu revisi. Butir 1 dan 2 di atas tidak diubah.
