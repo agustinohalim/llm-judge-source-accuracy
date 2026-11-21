@@ -1,0 +1,24 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "llm-judge-source-accuracy: source-dependent accuracy of LLM judges on physician-written and LLM-written hospital-course summaries"
+abstract: >-
+  Analysis code, aggregate results and analysis plan for a study of LLM judges on MIMIC-III-Ext-VeriFact-BHC:
+  judge sensitivity and specificity by source, error of judge-only rates and differences across 126 judge
+  settings, and simulated physician review comparing labels alone, Rogan-Gladen correction and prediction-powered
+  inference within each source. No data from the credentialed dataset are included.
+type: software
+license: MIT
+version: 1.0.0
+date-released: "2026-11-21"
+authors:
+  - given-names: Agustino
+    family-names: Halim
+    affiliation: "Information Systems and Technology, Universitas OSO, Pontianak, Indonesia"
+    orcid: "https://orcid.org/0009-0008-4388-1174"
+keywords:
+  - large language models
+  - LLM-as-a-judge
+  - clinical summarisation
+  - prediction-powered inference
+  - measurement error
+repository-code: "https://github.com/agustinohalim/llm-judge-source-accuracy"

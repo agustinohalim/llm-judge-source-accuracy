@@ -1,0 +1,31 @@
+{
+  "title": "llm-judge-source-accuracy: source-dependent accuracy of LLM judges on physician-written and LLM-written hospital-course summaries",
+  "description": "<p>Analysis code, aggregate results and analysis plan for the manuscript <em>Source-Dependent Accuracy of LLM Judges When Comparing Physician-Written and LLM-Written Hospital-Course Summaries</em>. Using the published judge verdicts and complete physician labels of MIMIC-III-Ext-VeriFact-BHC v1.1.0 (100 patients, 9095 atomic claims), the scripts measure judge sensitivity and specificity by source and the error of judge-only rates across 126 judge settings, and simulate physician review of m patients to compare labels alone, Rogan-Gladen correction (shared and per source), prediction-powered inference within each source, and PPI++.</p><p>No data from the credentialed dataset are included: the scripts run locally on the PhysioNet release and print aggregate tables only, with counts between 1 and 10 masked. Code: MIT. Notes, plan excerpt and figures: CC BY 4.0.</p>",
+  "upload_type": "software",
+  "license": "MIT",
+  "access_right": "open",
+  "language": "eng",
+  "version": "1.0.0",
+  "creators": [
+    {
+      "name": "Halim, Agustino",
+      "affiliation": "Information Systems and Technology, Universitas OSO, Pontianak, Indonesia",
+      "orcid": "0009-0008-4388-1174"
+    }
+  ],
+  "keywords": [
+    "large language models",
+    "LLM-as-a-judge",
+    "clinical summarisation",
+    "prediction-powered inference",
+    "measurement error"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "10.13026/7cqh-bc36",
+      "relation": "isDerivedFrom",
+      "resource_type": "dataset",
+      "scheme": "doi"
+    }
+  ]
+}
