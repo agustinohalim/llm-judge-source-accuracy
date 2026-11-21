@@ -1,5 +1,7 @@
 # llm-judge-source-accuracy
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24417571.svg)](https://doi.org/10.5281/zenodo.24417571)
+
 Analysis code, aggregate results and analysis plan for the manuscript *Source-Dependent Accuracy of LLM Judges When
 Comparing Physician-Written and LLM-Written Hospital-Course Summaries* (in preparation).
 
