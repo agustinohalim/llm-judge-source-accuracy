@@ -1,6 +1,6 @@
 # llm-judge-source-accuracy
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24417571.svg)](https://doi.org/10.5281/zenodo.24417571)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24417570.svg)](https://doi.org/10.5281/zenodo.24417570)
 
 Analysis code, aggregate results and analysis plan for the manuscript *Source-Dependent Accuracy of LLM Judges When
 Comparing Physician-Written and LLM-Written Hospital-Course Summaries* (in preparation).
@@ -27,7 +27,7 @@ the scripts import each other; set `PYTHONIOENCODING=utf-8` when redirecting out
 
 ## Layout
 
-- `analysis/` — scripts, the working notes `Hasil_JuriKlinis_0.md` to `Hasil_JuriKlinis_6.md` in which every number
+- `analysis/` — scripts, the working notes `Hasil_JuriKlinis_0.md` to `Hasil_JuriKlinis_7.md` in which every number
   of the manuscript was recorded with the copied output, and the figures in `Gambar/`. Order of the analyses:
   - `juriklinis_skema.py`, `juriklinis_hitung.py` — data structure and counts (`Hasil_0`);
   - `juriklinis_tahap1.py` — stage 1: judge accuracy by source and judge-only bias (`Hasil_1`);
@@ -37,8 +37,9 @@ the scripts import each other; set `PYTHONIOENCODING=utf-8` when redirecting out
   - `juriklinis_kepekaan.py` — planned sensitivity analyses (`Hasil_3`);
   - `juriklinis_pascapanel.py`, `juriklinis_pilot.py` — exploratory analyses of plan section I (`Hasil_4`);
   - `juriklinis_ketahanan.py` — exploratory analyses of plan section J (`Hasil_5`);
-  - `juriklinis_superpopulasi.py` — exploratory large-population simulation of plan section K, the source of the
-    manuscript's review budgets (`Hasil_6`);
+  - `juriklinis_superpopulasi.py` — exploratory large-population simulation of plan section K (`Hasil_6`);
+  - `juriklinis_anggaran_kontinu.py` — continuous review budgets and efficiency ratios of plan section L, computed
+    from the `Hasil_6` summary tables without new data; the source of the manuscript's review budgets (`Hasil_7`);
   - `juriklinis_gambar.py`, `juriklinis_suplemen.py` — figures and supplementary tables, parsed from the notes;
   - shared: `juriklinis_data.py` (loading), `juriklinis_bootstrap.py`, `juriklinis_markdown.py` (masking and tables).
 - `plan/` — an excerpt of the analysis plan (sections A, C, I, J, K).

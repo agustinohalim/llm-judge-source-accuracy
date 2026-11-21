@@ -8,7 +8,7 @@ abstract: >-
   inference within each source. No data from the credentialed dataset are included.
 type: software
 license: MIT
-version: 1.0.0
+version: 1.1.0
 date-released: "2026-11-21"
 authors:
   - given-names: Agustino
@@ -22,4 +22,4 @@ keywords:
   - prediction-powered inference
   - measurement error
 repository-code: "https://github.com/agustinohalim/llm-judge-source-accuracy"
-doi: 10.5281/zenodo.24417571
+doi: 10.5281/zenodo.24417570

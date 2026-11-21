@@ -1,6 +1,6 @@
 # Analysis plan (excerpt)
 
-Sections A (decisions locked before results), C (data rules) and I–K (analyses added after internal review rounds,
+Sections A (decisions locked before results), C (data rules) and I–L (analyses added after internal review rounds,
 each recorded here before it was run) of the authors' working plan, in Indonesian. Sections on journal choice,
 manuscript outline and work steps are omitted, and sentences describing the internal review rounds were shortened.
 File names `Hasil_JuriKlinis_N.md` refer to `analysis/`.
@@ -188,3 +188,20 @@ dengan koreksi populasi hingga dilaporkan sebagai kasus audit tetap atas 100 pas
 Skrip: `juriklinis_superpopulasi.py` → `Hasil_JuriKlinis_6.md`. Bila PPI tak mencapai anggaran sampai m = 200,
 naskah menyatakan bahwa juri tidak mengurangi tinjauan sampai lebar 0,10 untuk tim yang mengaudit dari populasi besar,
 dan rekomendasi menyebut lebar yang tercapai pada m yang wajar, bukan anggaran.
+
+## L. Anggaran kontinu dari lebar (dicatat 21 Nov 2026 sebelum dihitung; *post hoc*, tanpa data baru)
+
+Telaah internal keenam: anggaran kisi (PPI 30, label saja 50; Not Supported 20
+lawan 30) ditentukan langkah kisi, bukan oleh efisiensi. Dari
+tabel ringkasan superpopulasi `Hasil_JuriKlinis_6.md` (median atas 126 setelan), per varian dan per penaksir (PPI,
+label saja), tanpa menjalankan ulang simulasi:
+
+1. m kontinu untuk lebar 0,10: m* = m · (w_m / 0,10)², dari lebar median w_m pada m = 50 (kuantil t dekat z; lebar
+   menyusut ≈ 1/√m). Dicetak juga dari m = 20 dan m = 100 sebagai pemeriksaan kepekaan acuan.
+2. Rasio efisiensi (w_PPI / w_label)² pada m = 50: bagian pasien yang dibutuhkan PPI dibanding label saja untuk lebar
+   yang sama (< 1 = juri menghemat tinjauan).
+3. Varian: utama, satu dokter acak, Not Supported saja, Not Addressed saja, kalimat BHC LLM (tingkat).
+
+Skrip: `juriklinis_anggaran_kontinu.py` (mengurai tabel Markdown seperti `juriklinis_gambar.py`, tidak membaca data
+PhysioNet) → `Hasil_JuriKlinis_7.md`. Angka ini menggantikan anggaran kisi di abstrak, CRS, dan butir praktik; anggaran
+kisi tetap di Tabel 3 sebagai pemeriksaan cakupan.
